@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Security Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+        .container {
+            width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Password Security Analyzer</h2>
+
+    <form method="POST">
+        <input type="password" name="password" placeholder="Enter password">
+        <button name="check">Check Strength</button>
+        <button name="generate">Generate Password</button>
+    </form>
+
+    {% if result %}
+        <p><strong>Strength:</strong> {{ result.strength }}</p>
+        <p><strong>Score:</strong> {{ result.score }}/5</p>
+
+        {% if result.suggestions %}
+            <p><strong>Suggestions:</strong></p>
+            <ul>
+                {% for s in result.suggestions %}
+                    <li>{{ s }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+
+    {% if generated_password %}
+        <p><strong>Generated Password:</strong></p>
+        <p>{{ generated_password }}</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
